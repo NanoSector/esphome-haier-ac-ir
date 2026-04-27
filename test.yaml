@@ -1,0 +1,24 @@
+esphome:
+  name: haier-ac-ir-remote
+
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: arduino
+
+external_components:
+  - source:
+      type: local
+      path: components
+
+sensor:
+  - platform: template
+    id: current_temperature
+    lambda: |-
+      return 21.0;
+
+climate:
+  - platform: haier_ac176
+    sensor_id: current_temperature
+    pin: 5 # Pin with IR led
+    name: "AC Haier"
