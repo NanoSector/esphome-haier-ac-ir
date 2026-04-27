@@ -1,13 +1,13 @@
-#include "haier_acyrw02.h"
+#include "haier_ac176.h"
 
 namespace esphome {
-namespace haier_acyrw02 {
+namespace haier_ac176 {
 
-static const char *const TAG = "climate.haier_acyrw02";
+static const char *const TAG = "climate.haier_ac176";
 
 void HaierClimate::init(sensor::Sensor *sensor, uint16_t pin) {
   this->set_sensor(sensor);
-  ac_ = new IRHaierACYRW02(pin);
+  ac_ = new IRHaierAC176(pin);
   if (this->sensor_) {
     this->sensor_->add_on_state_callback([this](float state) {
       this->current_temperature = state;
@@ -48,33 +48,33 @@ void HaierClimate::setup_ir_cmd() {
   } else {
     ac_->on();
     if (this->mode == climate::CLIMATE_MODE_AUTO) {
-      ac_->setMode(kHaierAcYrw02Auto);
+      ac_->setMode(kHaierAcAuto);
     } else if (this->mode == climate::CLIMATE_MODE_COOL) {
-      ac_->setMode(kHaierAcYrw02Cool);
+      ac_->setMode(kHaierAcCool);
     } else if (this->mode == climate::CLIMATE_MODE_HEAT) {
-      ac_->setMode(kHaierAcYrw02Heat);
+      ac_->setMode(kHaierAcHeat);
     } else if (this->mode == climate::CLIMATE_MODE_DRY) {
-      ac_->setMode(kHaierAcYrw02Dry);
+      ac_->setMode(kHaierAcDry);
     } else if (this->mode == climate::CLIMATE_MODE_FAN_ONLY) {
-      ac_->setMode(kHaierAcYrw02Fan);
+      ac_->setMode(kHaierAcFan);
     }
 
     ac_->setTemp((uint8_t)this->target_temperature);
 
     if (this->fan_mode == climate::CLIMATE_FAN_AUTO) {
-      ac_->setFan(kHaierAcYrw02FanAuto);
+      ac_->setFan(kHaierAcFanAuto);
     } else if (this->fan_mode == climate::CLIMATE_FAN_LOW) {
-      ac_->setFan(kHaierAcYrw02FanLow);
+      ac_->setFan(kHaierAcFanLow);
     } else if (this->fan_mode == climate::CLIMATE_FAN_MEDIUM) {
-      ac_->setFan(kHaierAcYrw02FanMed);
+      ac_->setFan(kHaierAcFanMed);
     } else if (this->fan_mode == climate::CLIMATE_FAN_HIGH) {
-      ac_->setFan(kHaierAcYrw02FanHigh);
+      ac_->setFan(kHaierAcFanHigh);
     }
 
     if (this->swing_mode == climate::CLIMATE_SWING_OFF) {
-      ac_->setSwing(kHaierAcYrw02SwingVOff);
+      ac_->setSwing(kHaierAcSwingVOff);
     } else if (this->swing_mode == climate::CLIMATE_SWING_VERTICAL) {
-      ac_->setSwing(kHaierAcYrw02SwingVAuto);
+      ac_->setSwing(kHaierAcSwingVAuto);
     }
 
     ac_->setSleep(this->preset == climate::CLIMATE_PRESET_SLEEP);
@@ -93,8 +93,8 @@ climate::ClimateTraits HaierClimate::traits() {
   traits.set_supported_presets({climate::CLIMATE_PRESET_NONE, climate::CLIMATE_PRESET_SLEEP,
                                 climate::CLIMATE_PRESET_COMFORT, climate::CLIMATE_PRESET_BOOST});
 
-  traits.set_visual_max_temperature(HAIER_ACYRW02_TEMP_MAX);
-  traits.set_visual_min_temperature(HAIER_ACYRW02_TEMP_MIN);
+  traits.set_visual_max_temperature(HAIER_AC176_TEMP_MAX);
+  traits.set_visual_min_temperature(HAIER_AC176_TEMP_MIN);
   traits.set_visual_temperature_step(1);
   traits.set_supports_current_temperature(true);
 
@@ -126,5 +126,5 @@ void HaierClimate::control(const climate::ClimateCall &call) {
   ESP_LOGD("DEBUG", "  %s\n", ac_->toString().c_str());
 }
 
-}  // namespace haier_acyrw02
+}  // namespace haier_ac176
 }  // namespace esphome

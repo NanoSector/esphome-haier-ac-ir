@@ -10,10 +10,10 @@
 
 
 namespace esphome {
-namespace haier_acyrw02 {
+namespace haier_ac176 {
 
-const uint8_t HAIER_ACYRW02_TEMP_MIN = 16;  // 16C
-const uint8_t HAIER_ACYRW02_TEMP_MAX = 30;  // 32C
+const uint8_t HAIER_AC176_TEMP_MIN = 16;  // 16C
+const uint8_t HAIER_AC176_TEMP_MAX = 30;  // 32C
 
 class HaierClimate : public climate::Climate {
  public:
@@ -23,7 +23,7 @@ class HaierClimate : public climate::Climate {
   void init(sensor::Sensor *sensor, uint16_t pin);
  
  protected:
-  IRHaierACYRW02 *ac_{nullptr};
+  IRHaierAC176 *ac_{nullptr};
   sensor::Sensor *sensor_{nullptr};
   
   void setup_ir_cmd();
@@ -33,5 +33,5 @@ class HaierClimate : public climate::Climate {
 
 };
 
-}  // namespace haier_acyrw02
+}  // namespace haier_ac176
 }  // namespace esphome

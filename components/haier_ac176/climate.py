@@ -6,8 +6,8 @@ from esphome.core import CORE
 
 AUTO_LOAD = ["climate"]
 
-haier_acyrw02_ns = cg.esphome_ns.namespace("haier_acyrw02")
-HaierClimate = haier_acyrw02_ns.class_("HaierClimate", climate.Climate)
+haier_ac176_ns = cg.esphome_ns.namespace("haier_ac176")
+HaierClimate = haier_ac176_ns.class_("HaierClimate", climate.Climate)
 
 CONFIG_SCHEMA = climate.CLIMATE_SCHEMA.extend(
     {
