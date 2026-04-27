@@ -9,9 +9,8 @@ AUTO_LOAD = ["climate"]
 haier_ac176_ns = cg.esphome_ns.namespace("haier_ac176")
 HaierClimate = haier_ac176_ns.class_("HaierClimate", climate.Climate)
 
-CONFIG_SCHEMA = climate.CLIMATE_SCHEMA.extend(
+CONFIG_SCHEMA = climate.climate_schema(HaierClimate).extend(
     {
-        cv.GenerateID(): cv.declare_id(HaierClimate),
         cv.Required(CONF_SENSOR_ID): cv.use_id(sensor.Sensor),
         cv.Required(CONF_PIN): cv.int_
     }
