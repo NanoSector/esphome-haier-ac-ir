@@ -8,7 +8,6 @@
 #include "IRsend.h"
 #include "ir_Haier.h"
 
-
 namespace esphome {
 namespace haier_ac176 {
 
@@ -17,7 +16,7 @@ const uint8_t HAIER_AC176_TEMP_MAX = 30;  // 32C
 
 class HaierClimate : public climate::Climate {
  public:
-  HaierClimate() : climate::Climate() {}
+  HaierClimate() = default;
  public:
   void set_sensor(sensor::Sensor *sensor);
   void init(sensor::Sensor *sensor, uint16_t pin);

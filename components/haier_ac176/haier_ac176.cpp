@@ -74,7 +74,7 @@ void HaierClimate::setup_ir_cmd() {
     if (this->swing_mode == climate::CLIMATE_SWING_OFF) {
       ac_->setSwing(kHaierAcSwingVOff);
     } else if (this->swing_mode == climate::CLIMATE_SWING_VERTICAL) {
-      ac_->setSwing(kHaierAcSwingVAuto);
+      ac_->setSwing(kHaierAcSwingVUp);
     }
 
     ac_->setSleep(this->preset == climate::CLIMATE_PRESET_SLEEP);
@@ -96,7 +96,7 @@ climate::ClimateTraits HaierClimate::traits() {
   traits.set_visual_max_temperature(HAIER_AC176_TEMP_MAX);
   traits.set_visual_min_temperature(HAIER_AC176_TEMP_MIN);
   traits.set_visual_temperature_step(1);
-  traits.set_supports_current_temperature(true);
+  traits.add_feature_flags(climate::CLIMATE_SUPPORTS_CURRENT_TEMPERATURE);
 
   return traits;
 }
