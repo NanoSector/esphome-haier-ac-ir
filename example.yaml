@@ -22,7 +22,7 @@ web_server:
 external_components:
   - source:
       type: git
-      url: https://github.com/rozh1/esphome-haier-ac-ir
+      url: https://github.com/NanoSector/esphome-haier-ac-ir
 
 sensor:
   # External temperature sensor from Home Assistant 
@@ -31,7 +31,7 @@ sensor:
     entity_id: ${temperature_sensor}
 
 climate:
-  - platform: haier_acyrw02
+  - platform: haier_ac176
     sensor_id: current_temperature
     pin: 3 # Pin with IR led
     name: "AC Haier"
