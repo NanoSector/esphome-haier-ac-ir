@@ -1,13 +1,13 @@
-#include "haier_ac176.h"
+#include "haier_ac160.h"
 
 namespace esphome {
-namespace haier_ac176 {
+namespace haier_ac160 {
 
-static const char *const TAG = "climate.haier_ac176";
+static const char *const TAG = "climate.haier_ac160";
 
 void HaierClimate::init(sensor::Sensor *sensor, uint16_t pin) {
   this->set_sensor(sensor);
-  ac_ = new IRHaierAC176(pin);
+  ac_ = new IRHaierAC160(pin);
   if (this->sensor_) {
     this->sensor_->add_on_state_callback([this](float state) {
       this->current_temperature = state;
@@ -71,11 +71,11 @@ void HaierClimate::setup_ir_cmd() {
       ac_->setFan(kHaierAcFanHigh);
     }
 
-    if (this->swing_mode == climate::CLIMATE_SWING_OFF) {
-      ac_->setSwing(kHaierAcSwingVOff);
-    } else if (this->swing_mode == climate::CLIMATE_SWING_VERTICAL) {
-      ac_->setSwing(kHaierAcSwingVUp);
-    }
+    // if (this->swing_mode == climate::CLIMATE_SWING_OFF) {
+    //   ac_->setSwing(kHaierAcSwingVOff);
+    // } else if (this->swing_mode == climate::CLIMATE_SWING_VERTICAL) {
+    //   ac_->setSwing(kHaierAcSwingVUp);
+    // }
 
     ac_->setSleep(this->preset == climate::CLIMATE_PRESET_SLEEP);
     ac_->setHealth(this->preset == climate::CLIMATE_PRESET_COMFORT);
@@ -93,8 +93,8 @@ climate::ClimateTraits HaierClimate::traits() {
   traits.set_supported_presets({climate::CLIMATE_PRESET_NONE, climate::CLIMATE_PRESET_SLEEP,
                                 climate::CLIMATE_PRESET_COMFORT, climate::CLIMATE_PRESET_BOOST});
 
-  traits.set_visual_max_temperature(HAIER_AC176_TEMP_MAX);
-  traits.set_visual_min_temperature(HAIER_AC176_TEMP_MIN);
+  traits.set_visual_max_temperature(HAIER_AC160_TEMP_MAX);
+  traits.set_visual_min_temperature(HAIER_AC160_TEMP_MIN);
   traits.set_visual_temperature_step(1);
   traits.add_feature_flags(climate::CLIMATE_SUPPORTS_CURRENT_TEMPERATURE);
 
@@ -122,9 +122,9 @@ void HaierClimate::control(const climate::ClimateCall &call) {
 
   this->publish_state();
 
-  ESP_LOGD(TAG, "Haier A/C remote is in the following state:");
-  ESP_LOGD(TAG, "  %s\n", ac_->toString().c_str());
+  ESP_LOGD("DEBUG", "Haier A/C remote is in the following state:");
+  ESP_LOGD("DEBUG", "  %s\n", ac_->toString().c_str());
 }
 
-}  // namespace haier_ac176
+}  // namespace haier_ac160
 }  // namespace esphome

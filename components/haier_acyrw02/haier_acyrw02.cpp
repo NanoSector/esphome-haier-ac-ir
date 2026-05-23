@@ -1,13 +1,13 @@
-#include "haier_ac176.h"
+#include "haier_acyrw02.h"
 
 namespace esphome {
-namespace haier_ac176 {
+namespace haier_acyrw02 {
 
-static const char *const TAG = "climate.haier_ac176";
+static const char *const TAG = "climate.haier_acyrw02";
 
 void HaierClimate::init(sensor::Sensor *sensor, uint16_t pin) {
   this->set_sensor(sensor);
-  ac_ = new IRHaierAC176(pin);
+  ac_ = new IRHaierACYRW02(pin);
   if (this->sensor_) {
     this->sensor_->add_on_state_callback([this](float state) {
       this->current_temperature = state;
@@ -93,8 +93,8 @@ climate::ClimateTraits HaierClimate::traits() {
   traits.set_supported_presets({climate::CLIMATE_PRESET_NONE, climate::CLIMATE_PRESET_SLEEP,
                                 climate::CLIMATE_PRESET_COMFORT, climate::CLIMATE_PRESET_BOOST});
 
-  traits.set_visual_max_temperature(HAIER_AC176_TEMP_MAX);
-  traits.set_visual_min_temperature(HAIER_AC176_TEMP_MIN);
+  traits.set_visual_max_temperature(HAIER_ACYRW02_TEMP_MAX);
+  traits.set_visual_min_temperature(HAIER_ACYRW02_TEMP_MIN);
   traits.set_visual_temperature_step(1);
   traits.add_feature_flags(climate::CLIMATE_SUPPORTS_CURRENT_TEMPERATURE);
 
@@ -126,5 +126,5 @@ void HaierClimate::control(const climate::ClimateCall &call) {
   ESP_LOGD(TAG, "  %s\n", ac_->toString().c_str());
 }
 
-}  // namespace haier_ac176
+}  // namespace haier_acyrw02
 }  // namespace esphome
